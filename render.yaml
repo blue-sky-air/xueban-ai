@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: xueban-ai
+    runtime: docker
+    envVars:
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        value: https://token-plan-cn.xiaomimimo.com
+      - key: AI_MODEL
+        value: mimo-v2.5-pro
+      - key: JWT_SECRET
+        generateValue: true
