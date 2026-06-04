@@ -25,15 +25,27 @@ app.include_router(project.router)
 app.include_router(favorite.router)
 app.include_router(admin.router)
 
-# 健康检查
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
 
-# 服务前端静态文件（生产环境）
-frontend_dist = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")
-if os.path.isdir(frontend_dist):
-    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dist, "assets")), name="assets")
+# 生产环境：服务前端静态文件
+# Docker里路径是 /app/frontend/dist，本地开发是 ../frontend/dist
+possible_paths = [
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "dist"),
+    os.path.join("/app", "frontend", "dist"),
+]
+
+frontend_dist = None
+for p in possible_paths:
+    if os.path.isdir(p):
+        frontend_dist = p
+        break
+
+if frontend_dist:
+    assets_dir = os.path.join(frontend_dist, "assets")
+    if os.path.isdir(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
     @app.get("/{full_path:path}")
     async def serve_frontend(full_path: str):
