@@ -29,11 +29,17 @@ app.include_router(admin.router)
 def health():
     return {"status": "ok"}
 
+# 后台管理页面
+@app.get("/admin")
+def admin_page():
+    static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")
+    return FileResponse(os.path.join(static_dir, "admin.html"))
+
 # 生产环境：服务前端静态文件
-# Docker里路径是 /app/frontend/dist，本地开发是 ../frontend/dist
 possible_paths = [
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "dist"),
     os.path.join("/app", "frontend", "dist"),
+    os.path.join(os.path.dirname(__file__), "static"),
 ]
 
 frontend_dist = None
