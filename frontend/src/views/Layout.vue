@@ -39,6 +39,15 @@
         </transition>
       </router-view>
     </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <span class="copyright">© 2026 学伴AI</span>
+        <span class="divider">|</span>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="icp-link">
+          晋ICP备2026004245号
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -64,7 +73,11 @@ function handleCommand(cmd) {
 </script>
 
 <style scoped>
-.layout { min-height: 100vh; }
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .header {
   background: rgba(255, 255, 255, 0.85);
@@ -156,6 +169,7 @@ function handleCommand(cmd) {
   width: 100%;
   padding: 0 24px;
   animation: fadeIn 0.3s ease-out;
+  flex: 1;
 }
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -179,5 +193,39 @@ function handleCommand(cmd) {
   .nav-item { padding: 8px 10px; }
   .header-left { margin-right: 12px; }
   .logo-text { display: none; }
+}
+
+/* 底部备案信息 */
+.footer {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  padding: 16px 0;
+  margin-top: auto;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+.copyright {
+  color: #64748b;
+}
+.divider {
+  color: #cbd5e1;
+}
+.icp-link {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.icp-link:hover {
+  color: #4F46E5;
+  text-decoration: underline;
 }
 </style>
