@@ -8,7 +8,7 @@ echo "=============================="
 # 1. 安装依赖
 echo "[1/6] 安装系统依赖..."
 apt-get update -qq
-apt-get install -y -qq python3 python3-pip python3-venv nodejs npm nginx git > /dev/null 2>&1
+apt-get install -y -qq python3 python3-pip python3-venv nginx git > /dev/null 2>&1
 
 # 安装 Node.js 20
 if ! command -v node &> /dev/null || [[ $(node -v | cut -d. -f1 | tr -d v) -lt 18 ]]; then
